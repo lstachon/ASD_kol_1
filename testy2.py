@@ -5,23 +5,30 @@ def countingsort(arr):
     max = -10000000
     for i in range(0,len(arr)):
         if arr[i]<min:
-            min = arr [i]
+            min = arr[i]
         if arr[i] > max:
             max = arr[i]
     a = max - min
-    T = []
-    for i in range(0,a):
-        T[i]=0
-    for i in range(0,len(arr)):
-        T[arr[i]-min]+=1
+    T = [0 for i in range(0,a+1)]
 
+    for j in range(0,len(arr)):
+        T[arr[j]-min]+=1
 
-    for i in range(1,len(arr)):
+    for i in range(1,len(T)):
         T[i]+=T[i-1]
 
-    res =[]
+    res =[0 for i in range(0,len(arr))]
 
-    for i in range(0,T[len(T)-1]):
-        
+    for i in range(0,len(arr)):
+        res[T[arr[i]-min]-1] = arr[i]
+        T[arr[i]-min] -=1
+
+    return res
+
+
+arr = [600,605,601,601,605,606]
+
+print(countingsort(arr))
+
 
 
