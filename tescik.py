@@ -50,7 +50,7 @@ class Graph:
         # Initialize parent[] and visited[]
         visited =[False] * (self.V)
         parent = [-1] * (self.V)
-        distances = {vertex: 1000000 for vertex in self.vertices}
+        distances = {vertex: 1000000 for vertex in se}
         distances[src] = 0
 
         # Create a queue for BFS
