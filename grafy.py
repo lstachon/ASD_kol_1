@@ -1,50 +1,42 @@
+def min_distance(G,visited,distances):
+    min = 10000000000
+    for i in range(0,len(G)):
+        if visited[i] == 0:
+            if distances[i]<min:
+                min = distances[i]
+                indeks = i
+    return indeks
 
 def path_cost(G,s,t):
     visited=[0 for i in range(0,len(G))]
     queue = []
     parent =[-1 for i in range(0,len(G))]
-    visited[s]= 1
     queue.append(s)
-    distances = {vertex: 1000000 for vertex in len(G)}
+    distances = [1000000 for vertex in range(0,len(G))]
     distances[s] = 0
     vertices = [i for i in range(len(G))]
 
-    while vertices:
-        current_vertex = 
 
-        if a == t:
-            return path(G,parent,a)
-
-        for i in G[a]:
-
+    for i in range(0,len(G)):
+        curr = min_distance(G,visited,distances)
+        visited[curr]=1
+        print(curr)
+        for i in G[curr]:
             wierzcholek, waga = i
             if visited[wierzcholek] == 0:
-                queue.append(wierzcholek)
-                parent[wierzcholek] = a
-                visited[wierzcholek] = 1
+               if distances[wierzcholek]>distances[curr]+waga:
+                   distances[wierzcholek] = distances[curr]+waga
+    print(visited)
+    print(distances)
+    return distances[t]
 
 
-def path(G,parent, dest):
-    cost = 0
-    if parent[dest] == -1:
-        if dest < len(G):
-            print("v : " + str(dest))
-            return 0
-    a = path(G,parent,parent[dest])
-    print("a: " + str(a))
-    cost +=a
 
-    if dest <len(G):
-        print(dest)
-
-    return cost
-
-
-G = [[(1,0), (2,1)],
-[(3,1), (2,0)],
-[(3,0)],
+G = [[(1,1), (2,5)],
+[(2,3)],
 []]
-print( path_cost( G, 0, 3 ) )
+
+print( path_cost( G, 0, 2 ) )
 
 
 
