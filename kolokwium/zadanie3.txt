@@ -1,0 +1,6 @@
+Łukasz Stachoń
+1. sortujemy tablicę, nie mamy założeń o danych więc wykorzystujemy merge sorta (zlozonosc O(nlog(n))
+2. iterujemy po  posortowanej tablicy, każdą liczbę bierzemy po kolei jako szukaną sumę(target), na każdej wywołujemy liniową funkcję sprawdzającą warunek sumy opisany poniżej wyłączając z tablicy target.
+3. funkcja sprawdzająca sumę: na tablicy mamy dwa wskaźniki na początek (p) i koniec (k), dopóki początek jest mniejszy od końca sumujemy wartości pod tymi indeksami (suma = tab[p] + tab[k]),
+   jesli suma jest równa poszukiwanej kończymy, jesli jest większa zmniejszami wskaznik na koniec, jesli jest mniejsza zwiekszamy poczatek. Jesli petla sie zakonczyla nie znalazwszy poszukiwanej liczby zwracamy false.
+4. złożonośc czasowa rozwiązania: O(nlog(n))
