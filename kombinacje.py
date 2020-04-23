@@ -11,7 +11,7 @@ def kombinacje(arr, data, start, end, index, r):
         print()
         return
     i = start
-    while (i <= end and end - i + 1 >= r - index):
+    while i <= end and end - i + 1 >= r - index:
         data[index] = arr[i]
         kombinacje(arr, data, i + 1,end, index + 1, r)
         i += 1
