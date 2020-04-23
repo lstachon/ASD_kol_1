@@ -176,25 +176,7 @@ list = LinkedListA()
 # temp=merge(mrasnalista,dualshot)
 # temp.print(temp)
 
-def Partiton(A,low,high):
-    i = low-1
-    pivot = A[high]
-
-    for j in range(low, high):
-        if A[j]<pivot:
-            i+=1
-            A[j],A[i]=A[i],A[j]
-    A[high],A[i+1] = A[i+1],A[high]
-    return i+1
-
-def quicksort(A,low,high):
-    if(low<high):
-        pi = Partiton(A,low,high)
-        Partiton(A,pi+1,high)
-        Partiton(A,low,pi-1)
-
 A=[1,3,2,3,9,8]
 
-quicksort(A,0,len(A)-1)
 
 print(  )
