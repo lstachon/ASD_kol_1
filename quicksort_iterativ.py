@@ -14,4 +14,4 @@ def parrtition(arr,low, high):
     return i+1
 
 
-def quciksort
+# def quciksort
