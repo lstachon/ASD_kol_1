@@ -1,0 +1,80 @@
+# Łukasz Stachoń
+# do sortowania wykozystuje merge sorta, zamiast sprawdzać, która liczba jest większa sprawdzam która liczba jest ładniejsza (zlozonosc czasowa O (nlog(n)))
+# do policzenia ilości cyfr jednokrotnych i wielokrotnych wykorzystuję funkcje -> ile_jednokrotnych_wielokrotnych
+# w funkcji tej zliaczam ilosc wystąpien danej cyfry wykozystujac tablice wuekosci 10, zlozoność tej funkcji zalezy od ilosci cyfr liczby (max (10, K), gdzie K - ilosc cyfr w liczbie)
+# optymalne rozwiązanie funkcji ile_jednokrotnych_wielokrotnych wykorzystywałoby HashMape, gdzie możnaby w globalnej strukturze przechywywać dla każdej liczby przy mergowaniu ilość jednokrotnych i wielokrotnych liczb
+# obecne rozwiazanie nie pozwala na uzycie struktur, wiec dane te sa wyliczne dla kazdej liczby wielokrotnie (przy kazdym mergowaniu 2 tablic)
+
+def znajdz_srodek(A):
+    a = len(A) / 2
+    a = int(a)
+    return a
+
+def merge(A, B):
+    a = 0
+    b = 0
+    posortowana_tablica = []
+    if A == None or len(A) == 0:
+        return B
+    if B == None or len(B) == 0:
+        return A
+    while a != len(A) and b != len(B):
+        if ktora_ladniejsza(A[a], B[b]) == 0:
+            posortowana_tablica.append(A[a])
+            a += 1
+        else:
+            posortowana_tablica.append(B[b])
+            b += 1
+    while a != len(A):
+        posortowana_tablica.append(A[a])
+        a += 1
+    while b != len(B):
+        posortowana_tablica.append(B[b])
+        b += 1
+    return posortowana_tablica
+
+
+def mergesort(A, start, koniec):
+    if (len(A) > 1):
+        mid = znajdz_srodek(A)
+        tab_lewa = mergesort(A[:mid], start, mid)
+        tab_prawa = mergesort(A[mid:], mid + 1, koniec)
+
+        posortowana_tab = merge(tab_lewa, tab_prawa)
+        return posortowana_tab
+    return A
+
+# ilosc cyfr jednokrotnych oraz wielokronych w liczbie a
+def ile_jednokrotnych_wielokrotnych(a):
+    tablica = [0] * 10
+    while a > 0:
+        tablica[int(a % 10)] += 1
+        a = a // 10
+    print(tablica)
+    jednokrotne = 0
+    wielokrotne = 0
+    for i in tablica:
+        if i == 1:
+            jednokrotne += 1
+        if i > 1:
+            wielokrotne += 1
+    return jednokrotne, wielokrotne
+
+# porównuje która liczba jest ładniejsza i zwraca index 0 albo 1, jesli takie same to 2:
+def ktora_ladniejsza(a, b):
+    jed_a, wiel_a = ile_jednokrotnych_wielokrotnych(a)
+    jed_b, wiel_b = ile_jednokrotnych_wielokrotnych(b)
+
+    if jed_a > jed_b:
+        return 0
+    if jed_b > jed_a:
+        return 1
+    if jed_a == jed_b:
+        if wiel_a > wiel_b:
+            return 1
+        if wiel_b > wiel_a:
+            return 0
+    return 0
+
+def pretty_sort(T):
+    return mergesort(T, 0, len(T))
