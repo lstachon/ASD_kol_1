@@ -58,8 +58,29 @@ insert(r, TreeNode(40))
 insert(r, TreeNode(70))
 insert(r, TreeNode(60))
 insert(r, TreeNode(80))
+insert(r, TreeNode(90))
 
-print_tree(r, '')
+def printT(table):
+    l = len(table)
+    for i in table:
+        if len(i) > 0:
+            print(i)
+
+def prepare_to_print(root, t, index):
+    if root:
+        if len(t) >= index:
+            t.append([])
+            t[index].append(root.val)
+        else:
+            t[index].append(root.val)
+        index = index + 1
+        prepare_to_print(root.left, t, index)
+        prepare_to_print(root.right, t, index)
+    return t
+
+a = [[0], [1,2], [1,2,3,4]]
+b= prepare_to_print(r, [], 0)
+printT(b)
 
 print(check_if_bst(r,-100000,100000))
 
