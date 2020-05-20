@@ -1,0 +1,14 @@
+Łukasz Stachoń
+zadanie 3:
+
+Sortujemy klocki po pierwszej współrzędnej początkowej. Inicjalizujemy liste list, w ktorej bedziemy przechowywac przedzialy dla danego poziomu (np jej zawartosc po przejsciu algorytmu moze wygladac następująco: [[-inf, +inf],[(1, 8)], [(2,3),(5, 6)]).
+Na poczatku lista zawiera dwie wartosci (lista poziom 0: minus nieskonczonosc, plus nieskonczonosc - dla najnizszsego poziomu).
+Iterumemy po klockach, chcemy znaleźć najdłuższą podłogę z niezachodzących na siebie klocków biorąc zawsze pierwszy który nie zachodzi na wczesniejszy.
+Dodatkowo wykonujemy sprawdzenie czy klocek nalezy do przedzialu w liscie dla analizowanego poziomu, jesli nie to konczymy i zwracamy false. Dla pierwszego poziomu przedzial jest nieskonczonoscia wiec  każdy klocek bedzie pasowal, pozniej bedzie on zaweżany.
+Np dla klockow [1,2], [2,5], [3,6], [5,8], wezmiemy najpierw klocek [1,2], nastepnie [2,5] oraz [5,8]. Lista przedzialow zostanie zaktualizowana następująco (lista przedzialow poziom 1: [1,8]).
+Biorac kazdy pasujący klocek (pierwszy po wczceśniejszym i niezachodzący na niego) oznaczamy go jako odwiedzony w tablicy booli visited oraz aktualizujemy aktualna liste przedzialow dla analizowanego poziomu.
+Następnie powtarzamy procedurę dla nieodwiedzonych klocków, tym razem używając listy z poziomem 1 jako podłogi. Kontynuujemy do momentu az wszystkie klocki sa odwiedzone lub program wczesniej zwroci False.
+
+Dla zmodyfikowanej wersji problemu, gdzie dwa klocki mogą się zaczynać w tym samym miejscu, algorytm nie zadziała, ponieważ działajac w sposob zachlanny nie wiemy ktory przedzial wybrac.
+
+Zlozonosc jest zdominowana przez poczatkowe posortowanie klockow O(N*logN)(zakladajac uzycie struktury przechowujacej przedzialy o stalym czasie dostepu).

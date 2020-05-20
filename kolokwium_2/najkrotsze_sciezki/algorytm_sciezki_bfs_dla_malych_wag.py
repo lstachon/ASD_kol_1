@@ -5,21 +5,29 @@ def BFS(G,s,e):
     visited[s] = 1
     queue =[]
     queue.append(s)
-    result =[]
+    parent = [0]*len(G)
+    distance=[1]*len(G)
+    distance[s] = 0
+    
     while len(queue)!= 0:
+        print('graf:',G)
         a = queue.pop(0)
+        distance[a]+=1
         print(a," ")
-        if(a==e):
-            return 0
-
         for i in range(len(G[a])):
-
             if(G[a][i]>0):
                 if visited[i] == 0:
-                    queue.append(i)
                     G[a][i]-=1
-                    if(G[a][i]==0):
+                    queue.append(i)
+                    parent[i] = a
+                    if G[a][i]==0:
                         visited[i]=1
+                        distance[i] = distance[a]+1
+                        parent[i] = a
+
+
+
+    return distance,parent
 
 
 
@@ -31,4 +39,4 @@ G[0][2]=2
 G[2][1]=1
 G[1][3]=1
 
-BFS(G,0,3)
+print(BFS(G,0,3))
