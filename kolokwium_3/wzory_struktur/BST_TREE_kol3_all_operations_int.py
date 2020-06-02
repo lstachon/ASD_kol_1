@@ -7,8 +7,12 @@ class BSTNode:
         self.left = None
         self.right = None
 
+class BSTDict:
+    def __init__(self, root=None):
+        self.tree = root  # tu powinien być korzeń drzewa
+
     def find(self,key):
-        r = self
+        r = self.tree
         while r is not None:
             if key > r.key:
                 r=r.right
@@ -18,15 +22,15 @@ class BSTNode:
                 return r
 
     def insert(self,key,value):
-        if self.key is None and self.value is None:
-            self.key = key
-            self.value=value
-            return self
+        if self.tree.key is None and self.tree.value is None:
+            self.tree.key = key
+            self.tree.value=value
+            return self.tree
 
         n = BSTNode()
         n.key=key
         n.value=value
-        x = self
+        x = self.tree
         y = None
         while (x != None):
             y = x
@@ -45,7 +49,7 @@ class BSTNode:
 
     def succ(self,key):
         r = self.find(key)
-        if self.max(self.key).value==r.value:
+        if self.max(self.tree.key).value == r.value:
             return None
 
         if r.right is None:
@@ -63,7 +67,7 @@ class BSTNode:
 
     def pred(self,key):
         r = self.find(key)
-        if self.min(self.value).value == r.value:
+        if self.min(self.tree.value).value == r.value:
             return None
         if r.left is None:
             x = r
@@ -171,6 +175,22 @@ def check_if_balanced(r):
     if r is None:
         return True
 
+def wraper_count_interval(r,a,b,count):
+    if r is None:
+        return 0
+    if r.value >=a and r.value <=b:
+        count = wraper_count_interval(r.right,a,b,count) + 1 + wraper_count_interval(r.left,a,b,count)
+        print("val: "  + str(r.value) + " " + str(count))
+    elif r.value<a:
+        wraper_count_interval(r.right,a,b,count)
+    elif r.value>b:
+        wraper_count_interval(r.left,a,b,count)
+    return count
+
+def count_interval(r,a,b):
+    count =0
+    return wraper_count_interval(r,a,b,count)
+
 
 def check_if_bstwraper(node, down_size, upper_size):
     if node is None:
@@ -185,7 +205,7 @@ def check_if_bst(node):
     return check_if_bstwraper(node,-999999,999999)
 
 def printT(r):
-
+    r = r.tree
     table = prepare_to_print(r, [], 0)
 
     l = len(table)
@@ -205,7 +225,10 @@ def prepare_to_print(root, t, index):
         prepare_to_print(root.right, t, index)
     return t
 
-r = BSTNode()
+
+root = BSTNode()
+
+r = BSTDict(root)
 
 r.insert(4,4)
 r.insert(1,1)
@@ -214,11 +237,12 @@ r.insert(0,0)
 r.insert(2,2)
 r.insert(6,6)
 r.insert(9,9)
+#
+# print(check_if_bst(r.tree))
+#
+# printT(r)
+#
+# print(r.succ(2).value)
 
-print(check_if_bst(r))
+print(count_interval(r.tree,0,7))
 
-printT(r)
-
-print(r.pred(6).value)
-
-printT(r)
