@@ -1,4 +1,4 @@
-# wezel drzewa BST
+#Lukasz Stachon
 #algorytm działa dla kluczy liczbowych oraz kluczy w formie napisu
 class BSTNode:
     def __init__(self, key, value):
@@ -9,8 +9,8 @@ class BSTNode:
 
 
 class BSTDict:
-    def __init__(self):
-        self.tree = None  # tu powinien być korzeń drzewa
+    def __init__(self, root =None):
+        self.tree = root  # tu powinien być korzeń drzewa
 
     # dodaje element do drzewa
     def insert(self, key, value):
@@ -125,7 +125,6 @@ def compare_numbers(key1, key2):
     else:
         return 0
 
-
 def comparing_strings(a, b):
     for i in range(0, min(len(a), len(b))):
         if a[i] > b[i]:
@@ -140,52 +139,41 @@ def comparing_strings(a, b):
     elif len(a) == len(b):
         return 0
 
+def printT(r):
 
-# wypisz drzewo
-def printT(dict):
-    table = prepare_to_print(dict, [], 0)
+    table = prepare_to_print(r, [], 0)
+
     l = len(table)
     for i in table:
         if len(i) > 0:
             print(i)
-    print()
 
 def prepare_to_print(root, t, index):
     if root:
         if len(t) >= index:
             t.append([])
-            t[index].append((root.key, root.value))
+            t[index].append(root.value)
         else:
-            t[index].append((root.key, root.value))
+            t[index].append(root.value)
         index = index + 1
         prepare_to_print(root.left, t, index)
         prepare_to_print(root.right, t, index)
     return t
 
+r = BSTNode('d','d')
+table = BSTDict(r)
+table.insert('b','b')
+table.insert('f','f')
+table.insert('a','a')
+table.insert('c','c')
+table.insert('e','e')
+table.insert('g','g')
 
-bstdict = BSTDict()
+printT(r)
 
-bstdict.insert(2, 11)
-bstdict.insert(1, 22)
-bstdict.insert(3, 33)
-bstdict.insert(4, 44)
-bstdict.insert(5, 55)
-bstdict.insert(6, 55)
+table.remove('d')
 
-printT(bstdict.tree)
-
-bstdict.remove(2)
-printT(bstdict.tree)
+printT(r)
 
 
-bstdict = BSTDict()
 
-bstdict.insert('aaa', "asd")
-bstdict.insert('as', "kowalski")
-bstdict.insert('qwert', "Turing")
-bstdict.insert('q', "cz")
-
-printT(bstdict.tree)
-
-bstdict.remove('asd')
-printT(bstdict.tree)

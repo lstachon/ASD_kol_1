@@ -76,6 +76,7 @@ class BST:
                 succ.key , elem.key = elem.key , succ.key
                 succ.value, elem.value = elem.value , succ.value
                 del succ
+
     def min(self):
         root = self.root
         while root.left != None:
@@ -106,6 +107,15 @@ class BST:
             while elem.parent.left == elem:
                 elem = elem.parent
             return elem.parent
+
+
+def printT(r):
+    if r is not None:
+        return
+    print(r.value)
+    return (printT(r.right) and printT(r.left))
+
+
 root = BTSNode( 10 , 1)
 table = BST(root)
 table.inseret( 5 , 2)
@@ -117,6 +127,9 @@ table.inseret(  25, 7 )
 table.inseret(  22, 8 )
 table.inseret(  27, 9 )
 table.inseret(  24, 10 )
+
+printT(table)
+
 elem  = table.find( 12)
 print(elem.value)
 table.remove(12)
