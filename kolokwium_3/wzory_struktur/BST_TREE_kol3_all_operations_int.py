@@ -101,7 +101,7 @@ class BSTDict:
             return compare_numbers(key1, key2)
 
     def remove(self, key):
-        elem = self
+        elem = self.tree
         if elem.right is None and elem.left is None and elem.parent is None:
             self.value= None
             self.key = None
@@ -180,7 +180,6 @@ def wraper_count_interval(r,a,b,count):
         return 0
     if r.value >=a and r.value <=b:
         count = wraper_count_interval(r.right,a,b,count) + 1 + wraper_count_interval(r.left,a,b,count)
-        print("val: "  + str(r.value) + " " + str(count))
     elif r.value<a:
         wraper_count_interval(r.right,a,b,count)
     elif r.value>b:
@@ -240,7 +239,8 @@ r.insert(9,9)
 #
 # print(check_if_bst(r.tree))
 #
-# printT(r)
+r.remove(1)
+printT(r)
 #
 # print(r.succ(2).value)
 

@@ -1,10 +1,10 @@
-import random
-
 class Node:
     def __init__(self , key = None , value = None):
         self.key = key
         self.val = value
         self.next = None
+
+import random
 
 class Hashtable:
     PRIME = 1118317
@@ -16,8 +16,8 @@ class Hashtable:
 
     def hashFun(self , elem):
         elem = (self.A*elem + self.B) % self.PRIME
-
         return elem % len(self.arr)
+
     def insert(self , key , value):
         newNode = Node(key , value)
         hash = self.hashFun( key )
