@@ -43,16 +43,19 @@ def nicniedziala(table):
     broken_el=[]
     holes=[]
     psuj = None
-    for i in range(len(table.arr)+1):
+    for i in range(len(table.arr)):
         i = i % len(table.arr)
-        if table.arr[i].val is not -1 and gonext(table, i) is not i:
+        if table.arr[i].val != -1 and gonext(table, i) != i:
             broken_el.append(table.arr[i].val)
         if table.arr[i].val is -1:
             psuj = i
-        elif table.arr[i].val is not -1 and hashFun(table.arr[i].val, len(table.arr)) == i:
+        elif table.arr[i].val != -1 and hashFun(table.arr[i].val, len(table.arr)) == i:
             psuj = None
-        elif table.arr[i].val is not -1 and psuj is not None and hashFun(table.arr[i].val , len(table.arr)) != i:
+        elif table.arr[i].val != -1 and psuj is not None and hashFun(table.arr[i].val, len(table.arr)) != i:
             holes.append(psuj)
+
+    if table.arr[0].val != -1 and psuj is not None and hashFun(table.arr[i].val, len(table.arr)) != 0:
+        holes.append(psuj)
 
     return holes, broken_el
 
@@ -67,7 +70,7 @@ H.insert(13)
 H.insert(12)
 H.insert(12)
 
-# H.arr[14].val=-1
+H.arr[14].val=-1
 H.arr[5].val=-1
 
 prt(H.arr)
